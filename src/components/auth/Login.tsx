@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Eye,
-  EyeOff,
-  MessageCircle,
-  Mail,
-  Lock,
-  SeparatorHorizontal,
-} from "lucide-react";
+import { Eye, EyeOff, MessageCircle, Mail, Lock } from "lucide-react";
 import {
   Box,
   Button,
   Card,
   CardContent,
+  Divider,
   Input,
   Typography,
 } from "@mui/material";
@@ -25,7 +19,7 @@ const MOCK_USERS = [
   { email: "bob@example.com", password: "bob123", username: "bobsmith" },
 ];
 
-const Login = () => {
+const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -130,7 +124,7 @@ const Login = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="username"
-                    className="text-sm font-medium text-fuchsia-700"
+                    className="text-sm font-medium text-foreground"
                   >
                     Username
                   </label>
@@ -141,7 +135,7 @@ const Login = () => {
                     placeholder="Choose a username"
                     value={formData.username}
                     onChange={handleInputChange}
-                    className="rounded-xl border-b focus:ring-primary focus:border-primary"
+                    className="rounded-xl w-full border-b focus:ring-primary focus:border-primary"
                     required
                   />
                 </div>
@@ -206,7 +200,7 @@ const Login = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="confirmPassword"
-                    className="text-sm font-medium text-foreground"
+                    className="text-sm font-medium w-full text-foreground"
                   >
                     Confirm Password
                   </label>
@@ -219,7 +213,7 @@ const Login = () => {
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="pl-10 rounded-xl border-border focus:ring-primary focus:border-primary"
+                      className="pl-10 rounded-xl w-full border-border focus:ring-primary focus:border-primary"
                       required
                     />
                   </div>
@@ -241,7 +235,7 @@ const Login = () => {
 
             <div className="space-y-4">
               <div className="relative">
-                <SeparatorHorizontal />
+                <Divider />
                 <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-sm text-muted-foreground">
                   or continue with
                 </span>
@@ -288,4 +282,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;

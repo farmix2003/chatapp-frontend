@@ -153,16 +153,45 @@
   }
 
   .chat-button-primary {
-    @apply bg-primary text-primary-foreground hover:opacity-90 active:scale-95 
-           transition-all duration-200 rounded-xl px-6 py-3 font-medium
-           shadow-sm hover:shadow-md;
     background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    border-radius: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+  .chat-button-primary:hover {
+    opacity: 0.9;
+    box-shadow: var(--shadow-md);
+  }
+  .chat-button-primary:active {
+    transform: scale(0.95);
   }
 
   .chat-button-secondary {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 
-           active:scale-95 transition-all duration-200 rounded-xl px-6 py-3 
-           font-medium border border-border hover:border-primary/20;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border-radius: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-weight: 500;
+    border: 1px solid hsl(var(--border));
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+  .chat-button-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8);
+    border-color: hsl(var(--primary) / 0.2);
+  }
+  .chat-button-secondary:active {
+    transform: scale(0.95);
   }
 
   .chat-button-accent {
