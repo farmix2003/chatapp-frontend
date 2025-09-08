@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { GitHub, Google } from "@mui/icons-material";
+import { loginUser } from "../../service/service";
 
 // Mock user data for testing
 const MOCK_USERS = [
@@ -24,8 +25,8 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: "demo@chatapp.com", // Pre-fill for easy testing
-    password: "demo123",
+    email: "", // Pre-fill for easy testing
+    password: "",
     confirmPassword: "",
     username: "",
   });
@@ -39,36 +40,19 @@ const Auth = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const result = await loginUser(formData.email, formData.password);
 
-    if (isLogin) {
-      // Login logic
-      const user = MOCK_USERS.find(
-        (u) => u.email === formData.email && u.password === formData.password
-      );
-
-      if (user) {
-        navigate("/dashboard");
-      } else {
-        console.error("Invalid credentials");
-      }
+    if (result.token) {
+      navigate("/dashboard");
+      setIsLoading(false);
     } else {
-      // Registration logic
-      if (formData.password !== formData.confirmPassword) {
-        console.error("Passwords do not match");
-      } else if (formData.username.length < 3) {
-        console.error("Username must be at least 3 characters");
-      } else {
-        // In a real app, you'd create the account first
-        navigate("/dashboard");
-      }
+      console.log("Error");
+      setIsLoading(false);
     }
-
     setIsLoading(false);
   };
 
@@ -108,17 +92,6 @@ const Auth = () => {
           </Box>
 
           <CardContent className="space-y-6">
-            {/* Demo credentials info */}
-            <div className="p-3 bg-accent/20 border border-accent/30 rounded-xl">
-              <p className="text-sm text-accent-foreground">
-                <strong>Demo Login:</strong>
-                <br />
-                Email: demo@chatapp.com
-                <br />
-                Password: demo123
-              </p>
-            </div>
-
             <form onSubmit={handleSubmit} className="space-y-4">
               {!isLogin && (
                 <div className="space-y-2">

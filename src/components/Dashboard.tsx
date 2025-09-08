@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Users,
@@ -29,6 +29,7 @@ import {
   Typography,
 } from "@mui/material";
 import AccountMenu from "./Profile";
+import { getAllUsers } from "../service/service";
 
 // Mock data
 const friends = [
@@ -214,6 +215,13 @@ const Dashboard = () => {
         user.username.toLowerCase().includes(userSearchQuery.toLowerCase())) &&
       !user.isFriend
   );
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await getAllUsers();
+      console.log(response);
+    };
+    getUsers();
+  }, []);
 
   const handleConnectUser = (userId: number) => {
     setAddFriendOpen(false);
